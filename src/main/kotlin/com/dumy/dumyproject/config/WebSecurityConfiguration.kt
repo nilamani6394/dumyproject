@@ -12,7 +12,7 @@ class WebSecurityConfiguration : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity?) {
         http?.csrf()?.disable()
             ?.authorizeRequests()
-            ?.antMatchers("/dummyTest/dummy")
+            ?.antMatchers("/dummyTest/dummy","/user/**")
             ?.permitAll()
             ?.anyRequest()
             ?.authenticated()
