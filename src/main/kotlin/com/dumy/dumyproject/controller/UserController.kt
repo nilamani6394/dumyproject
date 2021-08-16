@@ -1,7 +1,10 @@
 package com.dumy.dumyproject.controller
 
 import com.dumy.dumyproject.entity.UserEntity
-import com.dumy.dumyproject.model.ReqUser
+import com.dumy.dumyproject.isValid
+import com.dumy.dumyproject.isValidPassword
+import com.dumy.dumyproject.model.req.ReqUser
+import com.dumy.dumyproject.model.req.ReqVerify
 import com.dumy.dumyproject.model.res.ResUser
 import com.dumy.dumyproject.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,7 +23,17 @@ class UserController {
         return "This is UserController"
     }
     @PostMapping("/signup")
-    fun signUp(@ModelAttribute request:ReqUser):ResponseEntity<*>{
+    fun signUp(@ModelAttribute request: ReqUser):ResponseEntity<*>{
+        val map=HashMap<String,String>()
+        if(request.name?.isEmpty() == true){
+            map["name"]="Name cannot be empty"
+        }
+        if(isValid(request.username)){
+            map["username"]="Enter a valid Username"
+        }
+        if(request.password.isNullOrEmpty() &&isValidPassword(request.password)){
+            map["password"]="Enter a valid password"
+        }
         val newUser=UserEntity(
             name = request.name,
             username = request.username,
@@ -37,4 +50,10 @@ class UserController {
         )
         return ResponseEntity(resUser,HttpStatus.OK)
     }
+   /*fun verifyUser(@ModelAttribute reqVerify: ReqVerify):ResponseEntity<*>{
+       val curUser=userRepository.findByUsername(reqVerify.username)
+      if (curUser?.equals(reqVerify.username) == true && curUser.equals(reqVerify.otp)){
+          val updateUser=userRepository.isVerified(true)
+      }
+   }*/
 }

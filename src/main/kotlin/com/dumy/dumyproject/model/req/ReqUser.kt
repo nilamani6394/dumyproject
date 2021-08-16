@@ -1,4 +1,4 @@
-package com.dumy.dumyproject.model
+package com.dumy.dumyproject.model.req
 
 data class ReqUser(
     val name:String?="",

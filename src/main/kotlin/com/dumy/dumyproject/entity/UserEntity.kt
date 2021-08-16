@@ -1,6 +1,8 @@
 package com.dumy.dumyproject.entity
 
 import javax.persistence.*
+import javax.validation.constraints.Email
+import javax.validation.constraints.Size
 
 @Entity
 data class UserEntity(
@@ -9,7 +11,9 @@ data class UserEntity(
     val id:Long?=-1,
     val name:String?="",
     @Column(unique = true,name = "email_Id")
+    @Email
     val username:String?="",
+    @Size(min = 2 ,max = 8)
     val password:String?="",
     val otp:Int?=0,
     @Column(unique = true)
