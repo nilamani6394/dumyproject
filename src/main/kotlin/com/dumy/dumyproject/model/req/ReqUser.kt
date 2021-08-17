@@ -5,5 +5,5 @@ data class ReqUser(
     val username:String?="",
     val password:String?="",
     val otp:Int?=0,
-    val contact:Long?=1
+    val contact:Long?=-1
 )

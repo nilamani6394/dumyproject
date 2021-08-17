@@ -5,12 +5,14 @@ import com.dumy.dumyproject.isValid
 import com.dumy.dumyproject.isValidPassword
 import com.dumy.dumyproject.model.req.ReqUser
 import com.dumy.dumyproject.model.req.ReqVerify
+import com.dumy.dumyproject.model.res.ResMessage
 import com.dumy.dumyproject.model.res.ResUser
 import com.dumy.dumyproject.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 import kotlin.random.Random
 
 @RestController
@@ -23,7 +25,7 @@ class UserController {
         return "This is UserController"
     }
     @PostMapping("/signup")
-    fun signUp(@ModelAttribute request: ReqUser):ResponseEntity<*>{
+    fun signUp(@Valid@ModelAttribute request: ReqUser):ResponseEntity<*>{
         val map=HashMap<String,String>()
         if(request.name?.isEmpty() == true){
             map["name"]="Name cannot be empty"
@@ -50,10 +52,13 @@ class UserController {
         )
         return ResponseEntity(resUser,HttpStatus.OK)
     }
-   /*fun verifyUser(@ModelAttribute reqVerify: ReqVerify):ResponseEntity<*>{
+    /*@GetMapping("/verified")
+   fun verifyUser(@ModelAttribute reqVerify: ReqVerify):ResponseEntity<*>{
        val curUser=userRepository.findByUsername(reqVerify.username)
       if (curUser?.equals(reqVerify.username) == true && curUser.equals(reqVerify.otp)){
-          val updateUser=userRepository.isVerified(true)
+         val updateUser=userRepository.isVerifiedOtp(true,otp = reqVerify.otp)
       }
+       return ResponseEntity(ResMessage("you are a verified user"),HttpStatus.OK)
    }*/
+
 }

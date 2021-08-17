@@ -16,6 +16,7 @@ data class UserEntity(
     @Size(min = 2 ,max = 8)
     val password:String?="",
     val otp:Int?=0,
+    val isVerified:Boolean?=false,
     @Column(unique = true)
     val contact:Long?=1
 )

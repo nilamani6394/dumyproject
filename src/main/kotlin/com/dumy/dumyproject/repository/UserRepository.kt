@@ -11,7 +11,7 @@ interface UserRepository : JpaRepository<UserEntity,Long> {
     //fun findByusername(username:String?,password:String?):UserEntity?
 
     /*@Modifying
-    @Query("Update user_entity where u.username=? and otp=? like %:username%")
-    fun isVerified(@Param("username") username: Boolean, otp:Int?):Boolean?
+    @Query("Update user_entity SET u.username like %:username%")
+    fun isVerifiedOtp(@Param("username") username: Boolean, otp:Int?):Boolean?
     fun findByUsername(username: String?): UserEntity?*/
 }

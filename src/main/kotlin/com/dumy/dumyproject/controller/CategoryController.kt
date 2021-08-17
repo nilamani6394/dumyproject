@@ -1,6 +1,6 @@
 package com.dumy.dumyproject.controller
 
-import com.dumy.dumyproject.entity.Category_Entity
+import com.dumy.dumyproject.entity.CategoryEntity
 import com.dumy.dumyproject.model.res.ResCategory
 import com.dumy.dumyproject.repository.CategoryRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,7 +18,7 @@ class CategoryController {
     private lateinit var categoryRepository: CategoryRepository
     @PostMapping("/create")
     fun addCategory(@ModelAttribute reqCategory: ResCategory?):ResponseEntity<*>?{
-        val cateGory=Category_Entity(name = reqCategory?.name,product = null)
+        val cateGory=CategoryEntity(name = reqCategory?.name,product = null)
         val saveCategory=categoryRepository.save(cateGory)
         val resCategory=ResCategory(saveCategory.id,saveCategory.name)
         return ResponseEntity(resCategory,HttpStatus.OK)

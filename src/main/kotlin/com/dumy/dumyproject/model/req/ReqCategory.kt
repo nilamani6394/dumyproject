@@ -1,8 +1,8 @@
 package com.dumy.dumyproject.model.req
 
-import com.dumy.dumyproject.entity.Product_Entity
+import com.dumy.dumyproject.entity.ProductEntity
 
 data class ReqCategory(
     val name:String?="",
-    val product:Product_Entity?
+    val product:ProductEntity?
 )
